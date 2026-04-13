@@ -121,13 +121,14 @@ export default function App() {
 
         <div className="flex-1 flex items-center relative z-10">
           <div className="container mx-auto px-6 py-12 md:py-20">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
               <motion.div
+                className="lg:col-span-3"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.21, 0.47, 0.32, 0.98] }}
               >
-                <h1 className="text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-8 md:mb-10">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl leading-[0.95] mb-8 md:mb-10">
                   We find the gaps. <br/>
                   <span className="text-brand-blue">We build the fix.</span> <br/>
                   It runs.
@@ -140,8 +141,8 @@ export default function App() {
                 </div>
               </motion.div>
 
-              {/* Radar on desktop, badge on mobile */}
-              <div className="relative hidden lg:block">
+              {/* Radar on desktop */}
+              <div className="relative hidden lg:block lg:col-span-2">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
