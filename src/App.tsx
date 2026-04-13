@@ -194,7 +194,7 @@ export default function App() {
             ].map((item, i) => (
               <div key={i}>
                 <FadeUp delay={i * 0.1}>
-                  <div className={`bg-white p-8 rounded-2xl border border-brand-light border-l-4 ${item.accent} hover:shadow-lg transition-all duration-300`}>
+                  <div className={`bg-white p-8 rounded-2xl border border-brand-light border-l-4 ${item.accent} hover:shadow-lg transition-all duration-300 h-full`}>
                     <item.icon size={28} className="text-brand-slate/40 mb-4" />
                     <h3 className="text-xl font-display mb-4 leading-tight">
                       {item.text}
