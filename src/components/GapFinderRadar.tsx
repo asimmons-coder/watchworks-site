@@ -100,9 +100,6 @@ export function GapFinderRadar() {
       {/* Center Point */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full z-30 shadow-[0_0_10px_white]" />
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] font-bold text-white/30 whitespace-nowrap font-display">
-        Scanning for operational gaps...
-      </div>
     </div>
   )
 }
