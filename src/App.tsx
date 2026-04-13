@@ -16,9 +16,6 @@ import {
   Menu,
   X,
   PhoneOff,
-  Moon,
-  DollarSign,
-  Target,
   CheckCircle2,
   Wrench,
   Users
@@ -177,21 +174,21 @@ export default function App() {
                 accent: "border-l-red-500"
               },
               {
-                icon: Moon,
-                text: "What happens when someone calls after 5pm?",
-                stat: "40% of service calls come outside business hours.",
+                icon: Calendar,
+                text: "How much time does your team spend on scheduling?",
+                stat: "Manual booking and rescheduling eats 10-15 hours per week for most offices.",
                 accent: "border-l-amber-500"
               },
               {
-                icon: DollarSign,
-                text: "What does a missed call actually cost you?",
-                stat: "One missed call can mean $500-$2,000 in lost revenue.",
+                icon: MessageSquare,
+                text: "How many leads go cold because nobody followed up?",
+                stat: "78% of customers buy from the first company that responds.",
                 accent: "border-l-brand-blue"
               },
               {
-                icon: Target,
-                text: "Are you capturing every lead that contacts you?",
-                stat: "Most businesses capture less than half their inbound leads.",
+                icon: ArrowRightLeft,
+                text: "Are your systems actually talking to each other?",
+                stat: "Disconnected CRMs, calendars, and dispatch tools create gaps data falls through.",
                 accent: "border-l-brand-green"
               }
             ].map((item, i) => (
