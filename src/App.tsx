@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react'
-import { motion } from 'motion/react'
+import { type ReactNode, useState } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import {
   Phone,
   Calendar,
@@ -12,10 +12,18 @@ import {
   Stethoscope,
   Truck,
   ArrowRight,
-  Mail
+  Mail,
+  Menu,
+  X,
+  PhoneOff,
+  Moon,
+  DollarSign,
+  Target,
+  CheckCircle2,
+  Wrench,
+  Users
 } from 'lucide-react'
 import { Logo } from './components/Logo'
-import { Counter } from './components/Counter'
 import { InteractiveFlow } from './components/InteractiveFlow'
 import { CapabilityCard } from './components/CapabilityCard'
 import { ScrollProgress, CursorGlow } from './components/Effects'
@@ -59,7 +67,33 @@ function FadeUp({ children, delay = 0 }: { children: ReactNode, delay?: number }
   )
 }
 
+function MobileNav({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          className="md:hidden absolute top-full left-0 right-0 bg-brand-navy/95 backdrop-blur-xl border-t border-white/10 z-50"
+        >
+          <div className="container mx-auto px-6 py-8 flex flex-col gap-6">
+            <a href="#how-it-works" onClick={onClose} className="text-lg font-display font-semibold text-white/70 hover:text-white transition-colors">How it works</a>
+            <a href="#what-we-build" onClick={onClose} className="text-lg font-display font-semibold text-white/70 hover:text-white transition-colors">Capabilities</a>
+            <a href="#who-we-serve" onClick={onClose} className="text-lg font-display font-semibold text-white/70 hover:text-white transition-colors">Who we serve</a>
+            <div className="pt-4 border-t border-white/10">
+              <BookACallButton className="w-full justify-center" />
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
 export default function App() {
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
+
   return (
     <div className="relative min-h-screen overflow-x-hidden selection:bg-brand-blue selection:text-white">
       <ScrollProgress />
@@ -75,22 +109,30 @@ export default function App() {
             <a href="#who-we-serve" className="hover:text-white transition-colors">Who we serve</a>
             <BookACallButton className="scale-90" />
           </div>
+          <button
+            onClick={() => setMobileNavOpen(!mobileNavOpen)}
+            className="md:hidden text-white/70 hover:text-white transition-colors p-2"
+            aria-label="Toggle menu"
+          >
+            {mobileNavOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+          <MobileNav isOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
         </nav>
 
         <div className="flex-1 flex items-center relative z-10">
-          <div className="container mx-auto px-6 py-20">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="container mx-auto px-6 py-12 md:py-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.21, 0.47, 0.32, 0.98] }}
               >
-                <h1 className="text-6xl md:text-8xl lg:text-9xl leading-[0.95] mb-10">
+                <h1 className="text-5xl md:text-7xl lg:text-9xl leading-[0.95] mb-8 md:mb-10">
                   We find the gaps. <br/>
                   <span className="text-brand-blue">We build the fix.</span> <br/>
                   It runs.
                 </h1>
-                <p className="text-xl md:text-2xl text-white/50 max-w-xl mb-12 leading-relaxed font-sans">
+                <p className="text-lg md:text-2xl text-white/50 max-w-xl mb-10 md:mb-12 leading-relaxed font-sans">
                   Watchworks AI builds custom AI systems for service businesses. We find the operational gaps costing you time and money, and we close them.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-8 items-start sm:items-center">
@@ -98,7 +140,8 @@ export default function App() {
                 </div>
               </motion.div>
 
-              <div className="relative mt-20 lg:mt-0">
+              {/* Radar on desktop, badge on mobile */}
+              <div className="relative hidden lg:block">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -116,30 +159,51 @@ export default function App() {
       </section>
 
       {/* Problem */}
-      <section className="py-32 animate-gradient relative overflow-hidden">
+      <section className="py-20 md:py-32 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <FadeUp>
-            <h2 className="text-5xl md:text-7xl mb-24 text-center">Sound familiar?</h2>
+            <h2 className="text-4xl md:text-7xl mb-6 text-center">Sound familiar?</h2>
+            <p className="text-xl text-brand-slate text-center max-w-2xl mx-auto mb-16 md:mb-24 font-sans">
+              These are the gaps we close. Every day, for businesses just like yours.
+            </p>
           </FadeUp>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { text: "Your front desk is underwater. Calls go to voicemail.", count: 237, suffix: " calls missed last month" },
-              { text: "After hours, your business goes dark. Customers call your competitor.", count: 14, suffix: " hours/week spent on scheduling" },
-              { text: "You're paying people to do work a machine should handle.", count: 4200, prefix: "$", suffix: "/month in missed revenue" },
-              { text: "Every missed call is missed revenue.", count: 100, suffix: "% lead capture rate is the goal" }
+              {
+                icon: PhoneOff,
+                text: "How many calls went to voicemail last week?",
+                stat: "The average service business misses 30%+ of inbound calls.",
+                accent: "border-l-red-500"
+              },
+              {
+                icon: Moon,
+                text: "What happens when someone calls after 5pm?",
+                stat: "40% of service calls come outside business hours.",
+                accent: "border-l-amber-500"
+              },
+              {
+                icon: DollarSign,
+                text: "What does a missed call actually cost you?",
+                stat: "One missed call can mean $500-$2,000 in lost revenue.",
+                accent: "border-l-brand-blue"
+              },
+              {
+                icon: Target,
+                text: "Are you capturing every lead that contacts you?",
+                stat: "Most businesses capture less than half their inbound leads.",
+                accent: "border-l-brand-green"
+              }
             ].map((item, i) => (
               <div key={i}>
                 <FadeUp delay={i * 0.1}>
-                  <div className="bg-white/60 backdrop-blur-md p-10 rounded-[2rem] glass-border group hover:bg-white transition-all duration-500">
-                    <div className="text-2xl mb-6 leading-tight font-display">
+                  <div className={`bg-white p-8 rounded-2xl border border-brand-light border-l-4 ${item.accent} hover:shadow-lg transition-all duration-300`}>
+                    <item.icon size={28} className="text-brand-slate/40 mb-4" />
+                    <h3 className="text-xl font-display mb-4 leading-tight">
                       {item.text}
-                    </div>
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      className="text-lg transition-transform duration-300"
-                    >
-                      <Counter value={item.count} prefix={item.prefix} suffix={item.suffix} />
-                    </motion.div>
+                    </h3>
+                    <p className="text-sm text-brand-slate leading-relaxed font-sans">
+                      {item.stat}
+                    </p>
                   </div>
                 </FadeUp>
               </div>
@@ -149,31 +213,30 @@ export default function App() {
       </section>
 
       {/* How it works */}
-      <section id="how-it-works" className="py-32 bg-white">
+      <section id="how-it-works" className="py-20 md:py-32 bg-brand-light/30">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center mb-24">
+          <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
             <FadeUp>
-              <h2 className="text-5xl md:text-7xl mb-8">How we work</h2>
-              <p className="text-2xl text-brand-slate max-w-2xl mx-auto font-sans">
+              <h2 className="text-4xl md:text-7xl mb-8">How we work</h2>
+              <p className="text-xl md:text-2xl text-brand-slate max-w-2xl mx-auto font-sans">
                 We don't sell software. We build systems that solve specific operational problems.
               </p>
             </FadeUp>
           </div>
 
           <div className="relative">
-            <div className="absolute top-1/2 left-0 right-0 h-px bg-brand-light hidden md:block -translate-y-1/2 z-0" />
             <InteractiveFlow />
           </div>
         </div>
       </section>
 
       {/* What we build */}
-      <section id="what-we-build" className="py-32 bg-brand-light/30">
+      <section id="what-we-build" className="py-20 md:py-32 bg-white">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center mb-24">
+          <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
             <FadeUp>
-              <h2 className="text-5xl md:text-7xl mb-8">AI systems that work</h2>
-              <p className="text-2xl text-brand-slate max-w-2xl mx-auto font-sans">
+              <h2 className="text-4xl md:text-7xl mb-8">AI systems that work</h2>
+              <p className="text-xl md:text-2xl text-brand-slate max-w-2xl mx-auto font-sans">
                 Custom-built infrastructure designed to handle the heavy lifting of your daily operations.
               </p>
             </FadeUp>
@@ -185,6 +248,7 @@ export default function App() {
                 description="Every call answered in 2 rings, 24/7. Natural, intelligent conversation that handles inquiries and booking."
                 icon={Phone}
                 animationType="phone"
+                defaultOpen
                 details="Our voice agents use advanced natural language processing to understand intent, handle complex scheduling, and provide a human-like experience for your customers."
               />
             </FadeUp>
@@ -238,30 +302,31 @@ export default function App() {
       </section>
 
       {/* Who we serve */}
-      <section id="who-we-serve" className="py-32 bg-white">
+      <section id="who-we-serve" className="py-20 md:py-32 bg-brand-light/30">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center mb-24">
+          <div className="max-w-4xl mx-auto text-center mb-16 md:mb-20">
             <FadeUp>
-              <h2 className="text-5xl md:text-7xl mb-8">Built for service businesses</h2>
-              <p className="text-2xl text-brand-slate max-w-2xl mx-auto font-sans">
+              <h2 className="text-4xl md:text-7xl mb-8">Built for service businesses</h2>
+              <p className="text-xl md:text-2xl text-brand-slate max-w-2xl mx-auto font-sans">
                 We specialize in industries where missing a call means missing a customer.
               </p>
             </FadeUp>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { name: "Property Management", icon: Building2 },
-              { name: "Lawn Care & Home Services", icon: Sprout },
-              { name: "Healthcare Practices", icon: Stethoscope },
-              { name: "Field Service Companies", icon: Truck }
+              { name: "Property Management", desc: "Tenant inquiries, maintenance requests, leasing calls.", icon: Building2 },
+              { name: "Lawn Care & Home Services", desc: "Seasonal booking, route scheduling, customer follow-ups.", icon: Sprout },
+              { name: "Healthcare Practices", desc: "Patient scheduling, after-hours triage, appointment reminders.", icon: Stethoscope },
+              { name: "Field Service Companies", desc: "Dispatch coordination, service requests, job scheduling.", icon: Truck }
             ].map((item, i) => (
               <div key={i}>
                 <FadeUp delay={i * 0.1}>
-                  <div className="flex flex-col items-center text-center group">
-                    <div className="w-24 h-24 rounded-[2rem] bg-brand-light flex items-center justify-center mb-8 text-brand-slate group-hover:bg-brand-blue group-hover:text-white transition-all duration-500 transform group-hover:-translate-y-3 group-hover:shadow-2xl group-hover:shadow-brand-blue/20">
-                      <item.icon size={48} />
+                  <div className="flex flex-col items-center text-center group p-8 rounded-2xl bg-white border border-brand-light hover:border-brand-blue/20 transition-all duration-500 hover:shadow-lg">
+                    <div className="w-20 h-20 rounded-2xl bg-brand-light flex items-center justify-center mb-6 text-brand-slate group-hover:bg-brand-blue group-hover:text-white transition-all duration-500 transform group-hover:-translate-y-2 group-hover:shadow-xl group-hover:shadow-brand-blue/20">
+                      <item.icon size={36} />
                     </div>
-                    <h3 className="text-xl font-display">{item.name}</h3>
+                    <h3 className="text-lg font-display mb-2">{item.name}</h3>
+                    <p className="text-sm text-brand-slate font-sans leading-relaxed">{item.desc}</p>
                   </div>
                 </FadeUp>
               </div>
@@ -271,26 +336,54 @@ export default function App() {
       </section>
 
       {/* About */}
-      <section className="py-32 bg-brand-navy text-white relative overflow-hidden">
+      <section className="py-20 md:py-32 bg-brand-navy text-white relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-20 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-start">
               <div className="lg:col-span-3">
                 <FadeUp>
-                  <h2 className="text-5xl md:text-7xl mb-10">Built by builders.</h2>
-                  <p className="text-2xl text-white/50 leading-relaxed mb-10 font-sans">
-                    Watchworks AI is founded by Alex Simmons, a builder who has spent the last 6 years creating technology platforms for enterprise companies.
+                  <h2 className="text-4xl md:text-7xl mb-10">Built by builders.</h2>
+                  <p className="text-xl md:text-2xl text-white/50 leading-relaxed mb-8 font-sans">
+                    Watchworks AI is founded by Alex Simmons. Six years building technology platforms for Fortune 500 companies. Now building AI systems for the businesses that actually run your city.
                   </p>
-                  <p className="text-2xl text-white/50 leading-relaxed font-sans">
-                    We are not consultants who hand you a deck. We build the thing, test it, and make sure it works. Our goal is to make your operations run like clockwork so you can focus on growth.
+                  <p className="text-xl md:text-2xl text-white/50 leading-relaxed font-sans">
+                    We are not consultants who hand you a deck. We build the thing, test it, and make sure it works. If it breaks, we fix it. Our goal is to make your operations run like clockwork so you can focus on growth.
                   </p>
                 </FadeUp>
               </div>
               <div className="lg:col-span-2">
                 <FadeUp delay={0.2}>
-                  <div className="aspect-square bg-white/5 rounded-[3rem] glass-border flex items-center justify-center relative group">
-                    <Logo className="scale-[2] transition-transform duration-700 group-hover:scale-[2.2]" />
-                    <div className="absolute inset-0 grid-pattern opacity-[0.05]" />
+                  <div className="space-y-6">
+                    <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+                      <h4 className="text-sm font-display font-bold uppercase tracking-widest text-brand-blue mb-4">Currently building for</h4>
+                      <ul className="space-y-3 font-sans text-white/60">
+                        <li className="flex items-start gap-3">
+                          <CheckCircle2 size={18} className="text-brand-blue mt-0.5 shrink-0" />
+                          <span>A 60-year-old lawn care company automating 10,000+ seasonal calls</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <CheckCircle2 size={18} className="text-brand-blue mt-0.5 shrink-0" />
+                          <span>A top-10 commercial real estate firm with 200+ managed properties</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                        <Wrench size={20} className="text-brand-blue mx-auto mb-2" />
+                        <div className="text-2xl font-display font-bold">6+</div>
+                        <div className="text-[10px] uppercase tracking-widest text-white/40 font-display">Years building</div>
+                      </div>
+                      <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                        <Building2 size={20} className="text-brand-blue mx-auto mb-2" />
+                        <div className="text-2xl font-display font-bold">F500</div>
+                        <div className="text-[10px] uppercase tracking-widest text-white/40 font-display">Clients served</div>
+                      </div>
+                      <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                        <Users size={20} className="text-brand-blue mx-auto mb-2" />
+                        <div className="text-2xl font-display font-bold">10K+</div>
+                        <div className="text-[10px] uppercase tracking-widest text-white/40 font-display">Users on platform</div>
+                      </div>
+                    </div>
                   </div>
                 </FadeUp>
               </div>
@@ -301,14 +394,17 @@ export default function App() {
       </section>
 
       {/* CTA */}
-      <section className="py-40 bg-brand-navy text-white text-center relative overflow-hidden border-t border-white/5">
+      <section className="py-24 md:py-40 bg-brand-navy text-white text-center relative overflow-hidden border-t border-white/5">
         <div className="container mx-auto px-6 relative z-10">
           <FadeUp>
-            <h2 className="text-6xl md:text-8xl mb-12 max-w-4xl mx-auto">Ready to make your operations run?</h2>
+            <h2 className="text-5xl md:text-8xl mb-6 max-w-4xl mx-auto">Ready to make your operations run?</h2>
+            <p className="text-xl text-white/40 mb-12 font-sans">
+              We take on 2-3 engagements at a time. Let's talk about whether we're the right fit.
+            </p>
             <div className="flex flex-col items-center gap-10">
               <BookACallButton />
-              <a href="mailto:alex@watchworks.ai" className="flex items-center gap-3 text-white/40 hover:text-white transition-colors text-xl font-sans tracking-wide">
-                <Mail size={24} />
+              <a href="mailto:alex@watchworks.ai" className="flex items-center gap-3 text-white/40 hover:text-white transition-colors text-lg font-sans tracking-wide">
+                <Mail size={20} />
                 alex@watchworks.ai
               </a>
             </div>

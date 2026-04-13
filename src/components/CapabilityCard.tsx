@@ -8,16 +8,17 @@ interface Props {
   icon: LucideIcon
   animationType: 'phone' | 'calendar' | 'routing' | 'followup' | 'clock' | 'integration'
   details?: string
+  defaultOpen?: boolean
 }
 
-export function CapabilityCard({ title, description, icon: Icon, animationType, details }: Props) {
-  const [isExpanded, setIsExpanded] = useState(false)
+export function CapabilityCard({ title, description, icon: Icon, animationType, details, defaultOpen = false }: Props) {
+  const [isExpanded, setIsExpanded] = useState(defaultOpen)
 
   return (
     <motion.div
       layout
       onClick={() => setIsExpanded(!isExpanded)}
-      className={`relative p-8 rounded-2xl bg-white border border-brand-light hover:border-brand-blue/20 transition-all duration-500 cursor-pointer group overflow-hidden ${
+      className={`relative p-8 rounded-2xl bg-white border border-brand-light hover:border-brand-blue/20 transition-all duration-500 cursor-pointer group overflow-hidden h-full ${
         isExpanded ? 'ring-2 ring-brand-blue/20 shadow-2xl z-10' : 'hover:shadow-xl hover:shadow-brand-blue/5'
       }`}
     >
@@ -36,9 +37,15 @@ export function CapabilityCard({ title, description, icon: Icon, animationType, 
       </div>
 
       <motion.h3 layout="position" className="text-2xl font-display mb-3">{title}</motion.h3>
-      <motion.p layout="position" className="text-brand-slate leading-relaxed mb-4 font-sans">
+      <motion.p layout="position" className="text-brand-slate leading-relaxed font-sans">
         {description}
       </motion.p>
+
+      {!isExpanded && (
+        <p className="text-brand-blue/50 text-xs font-display font-semibold uppercase tracking-widest mt-4">
+          Learn more
+        </p>
+      )}
 
       <AnimatePresence>
         {isExpanded && (
