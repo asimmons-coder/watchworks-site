@@ -59,7 +59,7 @@ function FadeUp({ children, delay = 0 }: { children: ReactNode, delay?: number }
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.8, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
     >
       {children}
@@ -127,7 +127,7 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.21, 0.47, 0.32, 0.98] }}
               >
-                <h1 className="text-5xl md:text-7xl lg:text-9xl leading-[0.95] mb-8 md:mb-10">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-8 md:mb-10">
                   We find the gaps. <br/>
                   <span className="text-brand-blue">We build the fix.</span> <br/>
                   It runs.
@@ -159,11 +159,11 @@ export default function App() {
       </section>
 
       {/* Problem */}
-      <section className="py-20 md:py-32 bg-white relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <FadeUp>
             <h2 className="text-4xl md:text-7xl mb-6 text-center">Sound familiar?</h2>
-            <p className="text-xl text-brand-slate text-center max-w-2xl mx-auto mb-16 md:mb-24 font-sans">
+            <p className="text-xl text-brand-slate text-center max-w-2xl mx-auto mb-12 md:mb-16 font-sans">
               These are the gaps we close. Every day, for businesses just like yours.
             </p>
           </FadeUp>
@@ -213,9 +213,9 @@ export default function App() {
       </section>
 
       {/* How it works */}
-      <section id="how-it-works" className="py-20 md:py-32 bg-brand-light/30">
+      <section id="how-it-works" className="py-16 md:py-24 bg-brand-light/30">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
+          <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16">
             <FadeUp>
               <h2 className="text-4xl md:text-7xl mb-8">How we work</h2>
               <p className="text-xl md:text-2xl text-brand-slate max-w-2xl mx-auto font-sans">
@@ -231,9 +231,9 @@ export default function App() {
       </section>
 
       {/* What we build */}
-      <section id="what-we-build" className="py-20 md:py-32 bg-white">
+      <section id="what-we-build" className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
+          <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16">
             <FadeUp>
               <h2 className="text-4xl md:text-7xl mb-8">AI systems that work</h2>
               <p className="text-xl md:text-2xl text-brand-slate max-w-2xl mx-auto font-sans">
@@ -302,9 +302,9 @@ export default function App() {
       </section>
 
       {/* Who we serve */}
-      <section id="who-we-serve" className="py-20 md:py-32 bg-brand-light/30">
+      <section id="who-we-serve" className="py-16 md:py-24 bg-brand-light/30">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center mb-16 md:mb-20">
+          <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16">
             <FadeUp>
               <h2 className="text-4xl md:text-7xl mb-8">Built for service businesses</h2>
               <p className="text-xl md:text-2xl text-brand-slate max-w-2xl mx-auto font-sans">
@@ -336,7 +336,7 @@ export default function App() {
       </section>
 
       {/* About */}
-      <section className="py-20 md:py-32 bg-brand-navy text-white relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-brand-navy text-white relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-start">
@@ -394,7 +394,7 @@ export default function App() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 md:py-40 bg-brand-navy text-white text-center relative overflow-hidden border-t border-white/5">
+      <section className="py-20 md:py-32 bg-brand-navy text-white text-center relative overflow-hidden border-t border-white/5">
         <div className="container mx-auto px-6 relative z-10">
           <FadeUp>
             <h2 className="text-5xl md:text-8xl mb-6 max-w-4xl mx-auto">Ready to make your operations run?</h2>
