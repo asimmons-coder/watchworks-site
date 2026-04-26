@@ -103,7 +103,7 @@ export function InteractiveFlow() {
         return (
           <div
             key={step.id}
-            className={`relative p-8 rounded-2xl border transition-all duration-300 cursor-pointer ${
+            className={`relative p-8 rounded-md border transition-all duration-300 cursor-pointer ${
               isActive
                 ? "bg-white border-brand-blue shadow-xl shadow-brand-blue/5"
                 : "bg-brand-light/50 border-transparent hover:border-brand-blue/30"
@@ -112,7 +112,7 @@ export function InteractiveFlow() {
             onMouseEnter={() => setActiveStep(step.id)}
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${
+              <div className={`w-12 h-12 rounded-md flex items-center justify-center transition-colors ${
                 isActive ? "bg-brand-blue text-white" : "bg-brand-steel/10 text-brand-steel"
               }`}>
                 <Icon size={24} />

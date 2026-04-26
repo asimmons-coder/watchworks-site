@@ -18,12 +18,12 @@ export function CapabilityCard({ title, description, icon: Icon, animationType, 
     <motion.div
       layout
       onClick={() => setIsExpanded(!isExpanded)}
-      className={`relative p-8 rounded-2xl bg-white border border-brand-light hover:border-brand-blue/20 transition-all duration-500 cursor-pointer group overflow-hidden h-full ${
+      className={`relative p-8 rounded-md bg-white border border-brand-light hover:border-brand-blue/20 transition-all duration-500 cursor-pointer group overflow-hidden h-full ${
         isExpanded ? 'ring-2 ring-brand-blue/20 shadow-2xl z-10' : 'hover:shadow-xl hover:shadow-brand-blue/5'
       }`}
     >
       <div className="flex justify-between items-start mb-6">
-        <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-500 ${
+        <div className={`w-14 h-14 rounded-md flex items-center justify-center transition-all duration-500 ${
           isExpanded ? 'bg-brand-blue text-white' : 'bg-brand-light text-brand-slate group-hover:bg-brand-blue/10 group-hover:text-brand-blue'
         }`}>
           <Icon size={28} />
@@ -59,7 +59,7 @@ export function CapabilityCard({ title, description, icon: Icon, animationType, 
               {details || "Our system integrates directly with your existing workflows to ensure seamless operation without manual intervention."}
             </p>
 
-            <div className="bg-brand-light/50 rounded-xl p-4 flex items-center justify-center h-24">
+            <div className="bg-brand-light/50 rounded-md p-4 flex items-center justify-center h-24">
               {animationType === 'phone' && (
                 <div className="flex gap-2">
                   {[1, 2, 3].map(i => (

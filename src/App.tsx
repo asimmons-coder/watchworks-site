@@ -27,7 +27,7 @@ import { ScrollProgress, CursorGlow } from './components/Effects'
 import { GapFinderRadar } from './components/GapFinderRadar'
 
 function BookACallButton({ className = "", variant = "primary" }: { className?: string, variant?: "primary" | "white" }) {
-  const baseStyles = "relative px-10 py-5 rounded-full font-display font-bold text-lg transition-all duration-500 flex items-center gap-3 group overflow-hidden"
+  const baseStyles = "relative px-10 py-5 rounded-md font-display font-bold text-lg transition-all duration-500 flex items-center gap-3 group overflow-hidden"
   const variants = {
     primary: "bg-brand-blue text-white hover:bg-brand-blue/90 shadow-xl shadow-brand-blue/20",
     white: "bg-white text-brand-blue hover:bg-brand-light shadow-xl shadow-white/10"
@@ -43,7 +43,7 @@ function BookACallButton({ className = "", variant = "primary" }: { className?: 
       <motion.div
         animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0, 0.2] }}
         transition={{ repeat: Infinity, duration: 2 }}
-        className={`absolute inset-0 rounded-full border-2 ${variant === 'primary' ? 'border-brand-blue' : 'border-white'}`}
+        className={`absolute inset-0 rounded-md border-2 ${variant === 'primary' ? 'border-brand-blue' : 'border-white'}`}
       />
       <span>Book a Call</span>
       <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -125,7 +125,7 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.21, 0.47, 0.32, 0.98] }}
               >
-                <h1 className="text-5xl md:text-6xl lg:text-7xl leading-[0.95] mb-8 md:mb-10">
+                <h1 className="text-[2rem] sm:text-4xl md:text-6xl lg:text-7xl leading-[1.05] md:leading-[0.95] mb-8 md:mb-10 text-balance">
                   We find the gaps. <br/>
                   <span className="text-brand-blue">We build the fix.</span> <br/>
                   It runs.
@@ -146,7 +146,13 @@ export default function App() {
                   transition={{ duration: 1.2, delay: 0.2 }}
                   className="flex justify-center"
                 >
-                  <GapFinderRadar />
+                  <div className="relative w-full max-w-[500px]">
+                    <GapFinderRadar />
+                    <span className="absolute -top-2 left-0 text-[10px] font-display font-bold uppercase tracking-[0.2em] text-white/40">Missed call</span>
+                    <span className="absolute -top-2 right-0 text-[10px] font-display font-bold uppercase tracking-[0.2em] text-white/40 text-right">Stale lead</span>
+                    <span className="absolute -bottom-2 left-0 text-[10px] font-display font-bold uppercase tracking-[0.2em] text-white/40">Manual booking</span>
+                    <span className="absolute -bottom-2 right-0 text-[10px] font-display font-bold uppercase tracking-[0.2em] text-white/40 text-right">Broken handoff</span>
+                  </div>
                 </motion.div>
               </div>
             </div>
@@ -194,7 +200,7 @@ export default function App() {
             ].map((item, i) => (
               <div key={i}>
                 <FadeUp delay={i * 0.1}>
-                  <div className={`bg-white p-8 rounded-2xl border border-brand-light border-l-4 ${item.accent} hover:shadow-lg transition-all duration-300 h-full`}>
+                  <div className={`bg-white p-8 rounded-md border border-brand-light border-l-4 ${item.accent} hover:shadow-lg transition-all duration-300 h-full`}>
                     <item.icon size={28} className="text-brand-slate/40 mb-4" />
                     <h3 className="text-xl font-display mb-4 leading-tight">
                       {item.text}
@@ -319,8 +325,8 @@ export default function App() {
             ].map((item, i) => (
               <div key={i}>
                 <FadeUp delay={i * 0.1}>
-                  <div className="flex flex-col items-center text-center group p-8 rounded-2xl bg-white border border-brand-light hover:border-brand-blue/20 transition-all duration-500 hover:shadow-lg">
-                    <div className="w-20 h-20 rounded-2xl bg-brand-light flex items-center justify-center mb-6 text-brand-slate group-hover:bg-brand-blue group-hover:text-white transition-all duration-500 transform group-hover:-translate-y-2 group-hover:shadow-xl group-hover:shadow-brand-blue/20">
+                  <div className="flex flex-col items-center text-center group p-8 rounded-md bg-white border border-brand-light hover:border-brand-blue/20 transition-all duration-500 hover:shadow-lg">
+                    <div className="w-20 h-20 rounded-md bg-brand-light flex items-center justify-center mb-6 text-brand-slate group-hover:bg-brand-blue group-hover:text-white transition-all duration-500 transform group-hover:-translate-y-2 group-hover:shadow-xl group-hover:shadow-brand-blue/20">
                       <item.icon size={36} />
                     </div>
                     <h3 className="text-lg font-display mb-2">{item.name}</h3>
@@ -351,41 +357,42 @@ export default function App() {
               </div>
               <div className="lg:col-span-2">
                 <FadeUp delay={0.2}>
-                  <div className="space-y-6">
-                    <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                      <h4 className="text-sm font-display font-bold uppercase tracking-widest text-brand-blue mb-4">Currently building for</h4>
-                      <ul className="space-y-3 font-sans text-white/60">
-                        <li className="flex items-start gap-3">
-                          <CheckCircle2 size={18} className="text-brand-blue mt-0.5 shrink-0" />
-                          <span>A 60-year-old lawn care company automating 10,000+ seasonal calls</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <CheckCircle2 size={18} className="text-brand-blue mt-0.5 shrink-0" />
-                          <span>A top-10 commercial real estate firm with 200+ managed properties</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="grid grid-cols-3 gap-4">
-                      <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-                        <Wrench size={20} className="text-brand-blue mx-auto mb-2" />
-                        <div className="text-2xl font-display font-bold">6+</div>
-                        <div className="text-[10px] uppercase tracking-widest text-white/40 font-display">Years building</div>
-                      </div>
-                      <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-                        <Building2 size={20} className="text-brand-blue mx-auto mb-2" />
-                        <div className="text-2xl font-display font-bold">F500</div>
-                        <div className="text-[10px] uppercase tracking-widest text-white/40 font-display">Clients served</div>
-                      </div>
-                      <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-                        <Users size={20} className="text-brand-blue mx-auto mb-2" />
-                        <div className="text-2xl font-display font-bold">10K+</div>
-                        <div className="text-[10px] uppercase tracking-widest text-white/40 font-display">Users on platform</div>
-                      </div>
-                    </div>
+                  <div className="p-6 rounded-md bg-white/5 border border-white/10">
+                    <h4 className="text-sm font-display font-bold uppercase tracking-widest text-brand-blue mb-4">Currently building for</h4>
+                    <ul className="space-y-3 font-sans text-white/60">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle2 size={18} className="text-brand-blue mt-0.5 shrink-0" />
+                        <span>A 60-year-old lawn care company automating 10,000+ seasonal calls</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle2 size={18} className="text-brand-blue mt-0.5 shrink-0" />
+                        <span>A top-10 commercial real estate firm with 200+ managed properties</span>
+                      </li>
+                    </ul>
                   </div>
                 </FadeUp>
               </div>
             </div>
+
+            <FadeUp delay={0.3}>
+              <div className="mt-16 md:mt-24 pt-12 md:pt-16 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12">
+                <div className="text-center sm:text-left">
+                  <Wrench size={24} className="text-brand-blue mb-4 mx-auto sm:mx-0" />
+                  <div className="text-5xl md:text-6xl font-display font-bold mb-2 tabular-nums">6+</div>
+                  <div className="text-xs uppercase tracking-[0.2em] text-white/40 font-display font-bold">Years building</div>
+                </div>
+                <div className="text-center sm:text-left">
+                  <Building2 size={24} className="text-brand-blue mb-4 mx-auto sm:mx-0" />
+                  <div className="text-5xl md:text-6xl font-display font-bold mb-2 tabular-nums">F500</div>
+                  <div className="text-xs uppercase tracking-[0.2em] text-white/40 font-display font-bold">Clients served</div>
+                </div>
+                <div className="text-center sm:text-left">
+                  <Users size={24} className="text-brand-blue mb-4 mx-auto sm:mx-0" />
+                  <div className="text-5xl md:text-6xl font-display font-bold mb-2 tabular-nums">10K+</div>
+                  <div className="text-xs uppercase tracking-[0.2em] text-white/40 font-display font-bold">Users on platform</div>
+                </div>
+              </div>
+            </FadeUp>
           </div>
         </div>
         <div className="absolute inset-0 grid-pattern opacity-[0.02] pointer-events-none" />
